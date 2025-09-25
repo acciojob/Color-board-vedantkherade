@@ -1,23 +1,15 @@
 /*  your css code here. If applicable */
-body{
-	display: flex;
-	justify-content: center;
-	align-items: center;
+body {
 	background-color: black;
-	height: 100vh;
-	margin: 0;
-
 }
-
-.container{
+.container {
 	display: grid;
-	grid-template-columns: repeat(40, 20px);
+	grid-template-columns: repeat(40,20px);
 	gap: 2px;
 }
 
-.square{
-	width: 20px;
-	height: 20px;
-	background: #1d1d1d;
-	transition: background 1s ease;
+.square {
+	height:20px;
+	width:20px;
+	background-color: rgb(29, 29, 29);
 }

@@ -1,29 +1,33 @@
 //your JS code here. If required.
-const container = document.querySelector(".container");
-const colors = ['#e74c3c', '#8e44ad', '#3498db', '#e67e22', '#2ecc71'];
+let container = document.querySelector('.container');
 
-for(let i=1; i<=800; i++){
-	const square = document.createElement("div");
-	square.classList.add("square");
+// color palette
+const colors = [
+  "#e74c3c", // red
+  "#8e44ad", // purple
+  "#3498db", // blue
+  "#e67e22", // orange
+  "#2ecc71"  // green
+];
 
-	square.addEventListener("mouseover", () => setColor(square));
-	square.addEventListener("mouseleave", () => removeColor(square));
-	
-	container.appendChild(square);
-}
-
-function setColor(element){
-	const color = getRandomColor();
-	element.style.background = color;
-	
-}
-
-
-function removeColor(element) {
-  element.style.background = '#1d1d1d';
-}
-
+// helper function: pick a random color
 function getRandomColor() {
   return colors[Math.floor(Math.random() * colors.length)];
 }
 
+for (let i = 0; i < 800; i++) {
+  let square = document.createElement('div');
+  square.classList.add('square');
+
+  square.addEventListener('mouseover', () => {
+    square.style.backgroundColor = getRandomColor();
+    square.style.transition = "none"; // instant change
+  });
+
+  square.addEventListener('mouseout', () => {
+    square.style.backgroundColor = "rgb(29, 29, 29)";
+    square.style.transition = "background-color 1s ease"; // smooth fade back
+  });
+
+  container.appendChild(square);
+}
