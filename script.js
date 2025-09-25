@@ -1,43 +1,29 @@
-// How many squares to render
-const TOTAL = 800;
+ let container = document.getElementById("container");
+      const colors = ["#e74c3c", "#8e44ad", "#3498db", "#e67e22", "#2ecc71"];
 
-// Mount point
-const board = document.getElementById('board');
+      //create 800 square
+      for (let i = 1; i <= 800; i++) {
+        const square = document.createElement("div");
+        square.classList.add("square");
 
-// Utility: random color (nice saturated palette)
-function randomColor() {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-}
+        //on hover
+        square.addEventListener("mouseover", () => setColor(square));
+        square.addEventListener("mouseout", () => delayRemoveColor(square));
 
-// Create and attach 800 squares
-for (let i = 0; i < TOTAL; i++) {
-  const sq = document.createElement('div');
-  sq.className = 'square';
+        container.appendChild(square);
+      }
 
-  // We’ll store any pending timeout id on the node itself
-  sq.addEventListener('mouseenter', () => {
-    // Cancel pending fade-back if any
-    if (sq._tid) {
-      clearTimeout(sq._tid);
-      sq._tid = null;
-    }
+      function setColor(ele) {
+        const color = getRandomColor();
+        ele.style.backgroundColor = color;
+      }
 
-    const color = randomColor();
-    sq.style.backgroundColor = color;
-    sq.style.boxShadow = `0 0 10px 2px ${color}`;
+      function delayRemoveColor(ele) {
+        setTimeout(()=>{
+          ele.style.backgroundColor='#1d1d1d';  // fade back after 1s
+        },1000)
+      }
 
-    // After 1 second, revert smoothly
-    sq._tid = setTimeout(() => {
-      sq.style.backgroundColor = '#1b1f26';
-      sq.style.boxShadow = 'none';
-      sq._tid = null;
-    }, 1000);
-  });
-
-  board.appendChild(sq);
-}
+      function getRandomColor() {
+        return colors[Math.floor(Math.random() * colors.length)];
+      }
